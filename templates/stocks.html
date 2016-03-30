@@ -1,4 +1,4 @@
-<h3>Stocks</h3>
+<h3>Stocks</h3><input type="text" ng-model="filt"></input>
 
 <!-- <h3>Here be stocks: {{stocks}}</h3> -->
 
@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="st in stocks" stock-row stock="st" stock-date="date">
+    <tr ng-repeat="st in stocks | filter: filt | orderBy: sortStock" stock-row stock="st" stock-date="date">
     </tr>
   </tbody>
 </table>

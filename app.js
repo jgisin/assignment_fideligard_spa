@@ -1,4 +1,4 @@
-var fideligard = angular.module('fideligard', ['ui.router', 'ngMaterial']);
+var fideligard = angular.module('fideligard', ['ui.router', 'ui.bootstrap', 'ngMaterial']);
 
 fideligard.config(function($stateProvider, $urlRouterProvider) {
 
@@ -19,11 +19,20 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
       },
       'stocks': {
         templateUrl: 'templates/stocks.html',
-        controller: 'StocksCtrl'
+        controller: 'StocksCtrl',
+      },
+      'portfolio': {
+        templateUrl: 'templates/portfolio.html',
+        controller: 'PortfolioCtrl'
       }
     }
-  });
-
+  })
+  .state('dashboard.portfolio',
+    {
+      url: '',
+      templateUrl: 'templates/portfolio.html',
+      controller: 'PortfolioCtrl'
+    });
 
 
 

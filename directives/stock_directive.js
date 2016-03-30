@@ -6,7 +6,7 @@ fideligard.directive('stockRow', function() {
     {
       stock: "=",
       stockDate: "=",
-      stockData: "="
+      open: "&"
     }
-  }
+  };
 });

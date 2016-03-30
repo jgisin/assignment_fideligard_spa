@@ -1,7 +1,7 @@
-fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerService', function($scope, StocksService, DatePickerService) {
+fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerService', '$uibModal', function($scope, StocksService, DatePickerService, $uibModal) {
 
-
-  $scope.stocks = [StocksService.singleStockOneYear()];
+  StocksService.fillStocks();
+  $scope.stocks = StocksService.stocks;
 
   $scope.date = DatePickerService.date;
 
@@ -12,5 +12,19 @@ fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerServi
       $scope.date = newValue;
     });
 
+  $scope.open = function(){
+
+    var tradeModal = $uibModal.open({
+      animation: true,
+      templateUrl: 'templates/trades.html',
+      controller: 'TradesCtrl',
+      resolve: {
+        buyStock: function(){
+          return null;
+        }
+      }
+    });
+
+  };
 
 }]);

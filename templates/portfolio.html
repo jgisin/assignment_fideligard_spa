@@ -1,0 +1,59 @@
+<h3>Portfolio</h3>
+<br/>
+
+<table class='table'>
+
+  <thead>
+    <th>Cost Basis</th>
+    <th>Current Value</th>
+    <th>Profit/Loss</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>{{ cash | currency }}</td>
+      <td>{{ cash | currency }}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    <tr>
+  </tbody>
+
+</table>
+
+
+<br/>
+<table class='table table-striped'>
+  <thead>
+    <th>Symbol</th>
+    <th>Quantity</th>
+    <th>Cost Basis</th>
+    <th>Current Value</th>
+    <th>Profit/Loss</th>
+    <th>Current Price</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
+    <th>Trade?</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CASH</td>
+      <td>{{cash | currency}}</td>
+      <td>{{cash | currency}}</td>
+      <td>{{cash | currency}}</td>
+      <td>CASH</td>
+      <td>CASH</td>
+      <td>CASH</td>
+      <td>CASH</td>
+      <td>CASH</td>
+      <td><a href="#">trade</a></td>
+    </tr>
+    <tr ng-repeat="stock in purchasedStocks" portfolio-stock stock='stock'>
+    </tr>
+  </tbody>
+</table>
