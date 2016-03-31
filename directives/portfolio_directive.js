@@ -5,6 +5,7 @@ fideligard.directive('portfolioStock', function(){
     restrict: 'A',
     scope: {
       stock: "=",
+      currentValue: "&"
     }
   };
 

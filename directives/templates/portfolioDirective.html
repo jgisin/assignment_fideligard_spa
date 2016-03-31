@@ -1,7 +1,7 @@
 <td>{{ stock.symbol}}</td>
 <td>{{ stock.quantity }}</td>
-<td>{{ stock.price * stock.quantity | currency }}</td>
-<td></td>
+<td>{{ stock.price | currency }}</td>
+<td>{{ currentValue({sym: stock.symbol, quantity: stock.quantity}) }}</td>
 <td></td>
 <td></td>
 <td></td>

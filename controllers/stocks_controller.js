@@ -12,18 +12,24 @@ fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerServi
       $scope.date = newValue;
     });
 
-  $scope.open = function(){
+  $scope.open = function(date, stock){
 
     var tradeModal = $uibModal.open({
       animation: true,
       templateUrl: 'templates/trades.html',
       controller: 'TradesCtrl',
+      size: 'lg',
       resolve: {
-        buyStock: function(){
-          return null;
+        stock: function(){
+          return stock;
+        },
+        date: function(){
+          return date;
         }
       }
     });
+
+
 
   };
 

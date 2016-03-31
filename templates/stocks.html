@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="st in stocks | filter: filt | orderBy: sortStock" stock-row stock="st" stock-date="date">
+    <tr ng-repeat="st in stocks | filter: filt | orderBy: sortStock" stock-row stock="st" stock-date="date" open="open(date, stock)">
     </tr>
   </tbody>
 </table>

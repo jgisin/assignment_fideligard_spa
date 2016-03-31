@@ -1,7 +1,7 @@
 <td>{{ stock[stockDate-28800000].symbol}}</td>
 <td>{{ stock[stockDate-28800000].price | currency }}</td>
-<td>{{ stock[stockDate-28800000].one_day | currency  }}</td>
-<td>{{ stock[stockDate-28800000].seven_day | currency  }}</td>
-<td>{{ stock[stockDate-28800000].thirty_day | currency  }}</td>
-<td ng-click="open()"><a href="#">trade</a>
+<td ng-class="{green: stock[stockDate-28800000].one_day > 0, red: stock[stockDate-28800000].one_day < 0}">{{ stock[stockDate-28800000].one_day | currency  }}</td>
+<td ng-class="{green: stock[stockDate-28800000].seven_day > 0, red: stock[stockDate-28800000].seven_day < 0}">{{ stock[stockDate-28800000].seven_day | currency  }}</td>
+<td ng-class="{green: stock[stockDate-28800000].thirty_day > 0, red: stock[stockDate-28800000].thirty_day < 0}">{{ stock[stockDate-28800000].thirty_day | currency  }}</td>
+<td class='trade-link' ng-click="open({date: stockDate-28800000, stock: stock[stockDate-28800000]})">trade</td>
 <!-- <td ui-sref='#'>Trade?</td>

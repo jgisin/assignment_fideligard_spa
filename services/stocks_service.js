@@ -1,7 +1,8 @@
-fideligard.factory('StocksService', ['$http', function($http) {
+fideligard.factory('StocksService', ['$q', '$http', function($q, $http) {
 
   var obj = {};
   obj.stocks = [];
+  var requests = [];
 
   var _stockSymbols = ['LULU', 'DOW', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'TEVA', 'HMC', 'KO', 'PEP'];
 
@@ -9,7 +10,7 @@ fideligard.factory('StocksService', ['$http', function($http) {
   var _singleStockOneYear = function(raw_data) {
     var daily_data = raw_data["query"]["results"]["quote"].reverse();
     var msDay = 86400000;
-    var results = {};
+    var results = {'symbol': daily_data[0]["Symbol"]};
     var counter = 0;
     var lastVals = {};
     for (var i = 1388534400000; i <= 1419984000000; i+= 86400000) {
@@ -53,18 +54,35 @@ fideligard.factory('StocksService', ['$http', function($http) {
   };
 
   var _getStock = function(symb){
+    requests.push(
     $http({
       method: 'GET',
       url: 'http://query.yahooapis.com/v1/public/yql?q=select * from   yahoo.finance.historicaldata where  symbol    = "' + symb + '" and startDate = "2014-01-01" and endDate   = "2014-12-31" &format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback='
     }).then(function successCallback(response){
       obj.stocks.push(_singleStockOneYear(response.data));
+    })
+  );
+  };
+
+  obj.stockFromSym = function(sym){
+    var stkIdx = 0;
+    obj.stocks.forEach(function(stk, index){
+      if(stk['symbol'] === sym){
+        stkIdx = index;
+      }
     });
+    return stkIdx;
   };
 
   obj.fillStocks = function(){
     _stockSymbols.forEach(function(symb){
       _getStock(symb);
     });
+    return $q.all(requests)
+    .then(function(response){
+      console.log(obj.stocks);
+    });
+
   };
 
 

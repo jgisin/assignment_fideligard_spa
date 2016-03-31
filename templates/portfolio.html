@@ -16,7 +16,7 @@
     <tr>
       <td>{{ cash | currency }}</td>
       <td>{{ cash | currency }}</td>
-      <td></td>
+      <td ng-class="{green: profit > 0, red: profit < 0}">{{ profit | currency }}</td>
       <td></td>
       <td></td>
       <td></td>
@@ -51,9 +51,9 @@
       <td>CASH</td>
       <td>CASH</td>
       <td>CASH</td>
-      <td><a href="#">trade</a></td>
+      <td class='trade-link'>trade</td>
     </tr>
-    <tr ng-repeat="stock in purchasedStocks" portfolio-stock stock='stock'>
+    <tr ng-repeat="stock in purchasedStocks" portfolio-stock stock='stock' current-value="currentValue(sym, quantity)">
     </tr>
   </tbody>
 </table>

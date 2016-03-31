@@ -1,1 +1,47 @@
-Trades go here.
+<div class="modal-header">
+  <h3 class="modal-title">Trade
+  <select class="pull-right">
+    <option>Trade</option>
+  </select></h3>
+</div>
+
+<div class="modal-body">
+  <div class="container">
+  <div class="row">
+    <div class="col-xs-4">
+      <label>Symbol</label>
+      <input type="text" class='form-control' value='{{stock.symbol}}'></input><br/>
+
+      <label>Buy/Sell</label>
+      <select class='form-control' ng-model="buySell">
+        <option value="-1">Buy</option>
+        <option value="1">Sell</option>
+      </select><br/>
+
+      <label>Quantity</label>
+      <input type="number" class='form-control' ng-model='quan'></input><br/>
+
+      <label>Date</label>
+      <input type="date" class='form-control' value="{{ dateString | date: 'yyyy-MM-dd' }}"></input><br/>
+
+      <label>Price</label>
+      {{ stock.price | currency }}<br/>
+
+      <label>Cost</label>
+      {{ stock.price * quan | currency}}<br/>
+    </div>
+
+    <div class="col-xs-6 col-xs-offset-1">
+      <h4>Cash Available</h4>
+      <p>{{ cash | currency }}</p>
+      <br/>
+      <h4>Order Status</h4>
+      Valid
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-lg btn-primary" ng-click="buyStock(date, stock, quan)">Place Order!</button>
+</div>

@@ -1,9 +1,14 @@
-fideligard.factory('PortfolioService', ['StocksService', 'DatePickerService', function(StocksService, DatePickerService){
+fideligard.factory('PortfolioService', ['DatePickerService', function(DatePickerService){
 
   var obj = {};
 
   var _currentCash = 10000000;
-  var _purchasedStocks = [{date: 1388534400000, symbol: 'AAPL', price: 553.13, quantity: 5}];
+  var _purchasedStocks = [{symbol: 'AAPL',
+                           price: 2765.65,
+                          quantity: 5,
+                          transactions:
+                            [{date: DatePickerService.date, quantity: 5, price: 553.13}]
+                          }];
 
   obj.getCash = function(){
     return _currentCash;
@@ -18,10 +23,16 @@ fideligard.factory('PortfolioService', ['StocksService', 'DatePickerService', fu
   };
 
   obj.buyStock = function(date, stock, quantity){
-    var amt = _checkStocks(stk.symbol)[0];
-    var stkIdx = _checkStocks(stk.symbol)[1];
-    var stk = {date: date, symbol: stock.symbol, price: stock.price, quantity: quantity};
+    var amt = _checkStocks(stock.symbol)[0];
+    var stkIdx = _checkStocks(stock.symbol)[1];
+    var stk = {date: date,
+               symbol: stock.symbol,
+               price: stock.price * quantity,
+               quantity: quantity,
+               transactions: [{date: date, quantity: quantity, price: stock.price}]};
     if(amt){
+      _purchasedStocks[stkIdx].transactions.push({quantity: quantity, date: date, price: stock.price});
+      _purchasedStocks[stkIdx].price += (quantity * stock.price);
       _purchasedStocks[stkIdx].quantity += quantity;
     }
     else{
